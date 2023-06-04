@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>DoGramm</title>
+    <style>
+        body {
+            background-color: #f0f8ff;
+            color: #000;
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            height: 100vh;
+            margin: 0;
+            padding: 0;
+        }
+        .navbar {
+            background-color: #4169e1;
+            padding: 10px;
+            width: 100%;
+            position: fixed;
+            top: 0;
+        }
+        .navbar h1 {
+            color: #fff;
+            margin: 0;
+        }
+        #chat {
+            margin-top: 50px;
+            max-height: calc(100vh - 100px);
+            overflow-y: auto;
+        }
+        p {
+            margin: 5px 0;
+        }
+        input[type="text"], input[type="submit"] {
+            padding: 5px;
+            margin-top: 10px;
+        }
+        input[type="text"] {
+            width: 200px;
+        }
+        input[type="submit"] {
+            background-color: #4169e1;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+        .message-buttons {
+            display: flex;
+            justify-content: center;
+            margin-top: 10px;
+        }
+        .message-buttons button {
+            margin: 5px;
+            background-color: #4169e1;
+            border: none;
+            color: white;
+        }
+        #chat {
+        background-color: #4169e1;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <center><h1>DoGramm</h1></center>
+    </div>
+    <div id="chat">
+        {% for message in messages %}
+            <p><strong>{{ message.username }}:</strong> {{ message.message }}</p>
+        {% endfor %}
+    </div>
+    <form action="/send" method="post">
+        <input type="text" name="username" placeholder="Ваше имя" autofocus>
+        <br>
+        <input type="text" name="message" placeholder="Введите сообщение">
+        <br>
+        <center><input type="submit" value="Отправить"></center>
+    </form>
+    <div class="message-buttons">
+        <button onclick="addMessage('Привет')">Привет</button>
+        <button onclick="addMessage('Как дела?')">Как дела?</button>
+        <button onclick="addMessage('Как ты?')">Как ты?</button>
+        <button onclick="addMessage('Что нового?')">Что нового?</button>
+    </div>
+
+    <script>
+        function addMessage(message) {
+            document.querySelector("form input[name='message']").value = message;
+        }
+    </script>
+</body>
+</html>
